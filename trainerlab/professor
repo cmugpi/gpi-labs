@@ -8,4 +8,3 @@ cd "$LAB_DIR" || exit
 source "$LAB_DIR/driver/problems"
 
 in_order
-
