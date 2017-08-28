@@ -35,7 +35,7 @@ and you should see a new file called `handin.zip` appear.
 If you're SSH'd into the UNIX machines, you'll need to get this `handin.zip`
 off of the UNIX machines and onto your actual computer. You'll probably want to
 use `scp` to do that. Run the following command from your local computer to 'securely copy' 
-`handin.zip` from your UNIX machine to the Downloads folder on your local computer. :
+`handin.zip` from your UNIX machine to the Downloads folder on your local computer:
 
 	scp andrew:~/private/gpi-labs/trainerlab/handin.zip ~/Downloads	
 
