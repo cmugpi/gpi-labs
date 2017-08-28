@@ -12,7 +12,7 @@ Make sure you've cloned the repo we use to distribute the labs:
 
 	git clone https://github.com/cmugpi/gpi-labs.git
 
-After you've clone the repo, cd into TrainerLab and ask the professor what to
+After cloning the repo, `cd` into TrainerLab and ask the professor what to
 do:
 
 	cd gpi-labs/trainerlab
@@ -34,7 +34,10 @@ and you should see a new file called `handin.zip` appear.
 
 If you're SSH'd into the UNIX machines, you'll need to get this `handin.zip`
 off of the UNIX machines and onto your actual computer. You'll probably want to
-use `scp` to do that.
+use `scp` to do that. Run the following command from your local computer to 'securely copy' 
+`handin.zip` from your UNIX machine to the Downloads folder on your local computer:
+
+	scp andrew:~/private/gpi-labs/trainerlab/handin.zip ~/Downloads	
 
 Once `handin.zip` is on your local computer, you'll be able to upload the zip
 to Autolab using your browser.
