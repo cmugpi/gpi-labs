@@ -1,2 +1,7 @@
 # Ignore handin files
 handin.zip
+
+# Ignore vim generated files
+*~
+*.swp
+*.swo
