@@ -17,12 +17,12 @@ no-uncomitted-changes:
 	fi
 
 remove-trailing-whitespace:
-	sed -i '' -e 's/ *$$//' big-league.txt; \
-	sed -i '' -e 's/ *$$//' clean-up.txt; \
-	sed -i '' -e 's/ *$$//' fire-him.txt; \
-	sed -i '' -e 's/ *$$//' kill-bugs.txt; \
-	sed -i '' -e 's/ *$$//' up-down-all-around.txt; \
-	sed -i '' -e 's/ *$$//' sliding.txt; \
+	sed -i -e 's/ *$$//' big-league.txt; \
+	sed -i -e 's/ *$$//' clean-up.txt; \
+	sed -i -e 's/ *$$//' fire-him.txt; \
+	sed -i -e 's/ *$$//' kill-bugs.txt; \
+	sed -i -e 's/ *$$//' up-down-all-around.txt; \
+	sed -i -e 's/ *$$//' sliding.txt; \
 	if git status -unormal --porcelain | grep -q .; then \
 		echo "WARNING: We found trailing whitespace in your submission."; \
 		echo "We removed it automatically, since it does not play well with"; \
