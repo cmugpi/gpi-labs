@@ -1,0 +1,6 @@
+Over 900 students a year take 15-112.  It seems like everyone wants to take it!
+Help Kidney Srosby, of the Pittsburgh Penguins with his 15-112 homework. Here's
+a hint: his bug is just a single character. (Don't change anything else)
+
+def add(x,y):
+	return x-y
