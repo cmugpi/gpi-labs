@@ -18,9 +18,9 @@ function check_solution {
   local ours=$3
   temp_file=$(mktemp)
   if [ "$(uname)" = "Darwin" ]; then
-    while IFS="" read -r line; do echo -n "$line" | no_trail_whitespace | md5; done < "$theirs" > "$temp_file"
+    while IFS="" read -r line; do echo "$line" | no_trail_whitespace | md5; done < "$theirs" > "$temp_file"
   else
-    while IFS="" read -r line; do echo -n "$line" | no_trail_whitespace | md5sum | awk '{print $1}'; done < "$theirs" > "$temp_file"
+    while IFS="" read -r line; do echo "$line" | no_trail_whitespace | md5sum | awk '{print $1}'; done < "$theirs" > "$temp_file"
   fi
 
   if [[ $(cmp "$temp_file" "$ours") ]]; then
