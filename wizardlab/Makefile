@@ -29,5 +29,5 @@ remove-trailing-whitespace:
 		git commit -m "Remove trailing whitespace"; \
 	fi;
 
-handin.zip: no-uncomitted-changes find-replace.txt fix-typos.txt hedwig.txt hogwarts.txt
+handin.zip: no-uncomitted-changes remove-trailing-whitespace find-replace.txt fix-typos.txt hedwig.txt hogwarts.txt
 	zip -r $@ find-replace.txt fix-typos.txt hedwig.txt hogwarts.txt 
