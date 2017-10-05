@@ -1,10 +1,10 @@
-c7926d2f6c0cce3bfd4b86899b680136
-d432c4fc4846ce29cc821a559cd458b6
-7e150e81d09d5e069e4a50b5c34253c3
-79d880795cb106e252166f0ba07d1955
-41686e761ecce4922bcecd366c20e3ba
-817fc14098a3278d97514a130dcd4208
-214f9fdab2ce41c05dc3bb9b4681d297
-c3ef750ad7efaa2a1b78a1d1405d72d0
-ca71a66d93c264b48eb8cc93c9ac78fe
-2e382077d79203e910e19022a7b46e19
+library/A Child Called 'It' - history
+library/A Great and Terrible Beauty - magic
+library/Harry Potter and the Order of the Phoenix - scifi
+library/How the Grinch Stole Christmas! - action
+library/Les Misérables - mystery
+library/Pippi Longstocking - history
+library/The Count of Monte Cristo - magic
+library/The Hunchback of Notre-Dame - romance
+library/The Very Hungry Caterpillar - history
+library/Torment - action

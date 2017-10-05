@@ -1,5 +1,5 @@
-c7926d2f6c0cce3bfd4b86899b680136
-79d880795cb106e252166f0ba07d1955
-214f9fdab2ce41c05dc3bb9b4681d297
-c3ef750ad7efaa2a1b78a1d1405d72d0
-2e382077d79203e910e19022a7b46e19
+library/A Child Called 'It' - history
+library/How the Grinch Stole Christmas! - action
+library/The Count of Monte Cristo - magic
+library/The Hunchback of Notre-Dame - romance
+library/Torment - action
