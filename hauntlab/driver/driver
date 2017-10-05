@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+# This script checks your solution against our reference solution.
+
+launch_dir=$(pwd)
+driver_dir="$(dirname "$0")"
+
+cd "$driver_dir" || exit
+
+echo $launch_dir
+
+scores=""
+
+tests_passed=0
+tests_failed=0
+function check_solution {
+
+  cd $launch_dir
+
+  echo "Checking $1"
+  local test_name=$1
+  local theirs=$2
+  local ours=$3
+
+  if [ ! -e "$launch_dir/$theirs" ]; then
+      echo "There is no submission for $test_name."
+      ((++tests_failed))
+      scores=$scores"\"$test_name\": 0"
+  elif [ ! -x "$launch_dir/$theirs" ]; then
+      echo "The submission for $test_name is not executable."
+      ((++tests_failed))
+      scores=$scores"\"$test_name\": 0"
+  else
+      # The first is for GNU mktemp, the second is for OS X
+      temp_in=$(mktemp 2> /dev/null || mktemp -t tmp)
+      "$launch_dir/$theirs" | sort > "$temp_in"
+      temp_file=$(mktemp 2> /dev/null || mktemp -t tmp)
+
+
+      if [ "$(uname)" = "Darwin" ]; then
+          while read -r line; do echo "$line" | md5; done < "$temp_in" > "$temp_file"
+      else
+          while read -r line; do echo "$line" | md5sum | awk '{print $1}'; done < "$temp_in" > "$temp_file"
+      fi
+
+      if [[ $(cmp "$temp_file" "$ours") ]]; then
+          echo "Your solution is incorrect at at line: " "$(cmp "$temp_file" "$ours" | sed -n -e 's/^.*, line //p')"
+          echo "If you can't tell why, submit to Autolab for more detailed feedback."
+          ((++tests_failed))
+          scores=$scores"\"$test_name\": 0"
+      else
+          echo "Your solution is correct"
+          ((++tests_passed))
+          scores=$scores"\"$test_name\": 1"
+      fi
+
+      rm "$temp_file"
+      rm "$temp_in"
+  fi
+
+  cd $driver_dir
+}
+
+echo
+check_solution flashlight flashlight.sh $driver_dir/tests/flashlight.sol
+scores="$scores, "
+echo
+check_solution "ghost-catcher-3000" "ghost-catcher-3000.sh" "$driver_dir/tests/ghost-catcher-3000.sol"
+scores="$scores, "
+echo
+check_solution "ghost-catcher-3001" "ghost-catcher-3001.sh" "$driver_dir/tests/ghost-catcher-3001.sol"
+scores="$scores, "
+echo
+check_solution find-the-hidden find-the-hidden.sh $driver_dir/tests/find-the-hidden.sol
+
+echo
+echo "Finished."
+echo "Tests passed: $tests_passed"
+echo "Tests failed: $tests_failed"
+echo "Tests total:" $((tests_failed + tests_passed))
+echo
+echo "{\"scores\": {$scores}}"
