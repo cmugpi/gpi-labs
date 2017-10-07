@@ -72,7 +72,6 @@ library/She's Come Undone - spooky
 library/Sophie's Choice - spooky
 library/Steppenwolf - spooky
 library/The Age of Innocence - ghosts
-library/The Awakening - horror
 library/The Brothers Karamazov - ghosts
 library/The Color Purple - ghosts
 library/The Complete Poems of Emily Dickinson - spooky
