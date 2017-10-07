@@ -69,7 +69,6 @@ library/Peter Pan - spooky
 library/Romeo and Juliet - ghosts
 library/Shadow Kiss - ghosts
 library/She's Come Undone - spooky
-library/Shōgun - ghosts
 library/Sophie's Choice - spooky
 library/Steppenwolf - spooky
 library/The Age of Innocence - ghosts
