@@ -6,7 +6,6 @@ library/Fallen - spooky
 library/Jurassic Park - spooky
 library/Murder on the Orient Express - spooky
 library/Shantaram - spooky
-library/The Awakening - horror
 library/The Lord of the Rings - spooky
 library/The Mists of Avalon - ghosts
 library/The Origin of Species - spooky
