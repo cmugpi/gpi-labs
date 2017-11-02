@@ -1,3 +1,5 @@
+making a change
+
 # collab
 
 This week's lab will teach you some more about Git. In particular, we're going
