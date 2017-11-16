@@ -1,0 +1,236 @@
+#!/usr/bin/env bash
+
+# cd into folder where the driver is located, or quit (defensive)
+# http://stackoverflow.com/questions/3349105
+cd "${0%/*}" || exit 1
+
+echo "In: $(pwd)"
+
+indent4() {
+  sed -e 's/^/    /'
+}
+indent8() {
+  sed -e 's/^/        /'
+}
+
+# Helper colors
+cnone="$(echo -ne '\033[0m')"
+cwhiteb="$(echo -ne '\033[1;37m')"
+cred="$(echo -ne '\033[0;31m')"
+cgreen="$(echo -ne '\033[0;32m')"
+
+# Detects whether we can add colors or not
+# http://stackoverflow.com/a/911213
+in_white() {
+  [ -t 1 ] && echo -n "$cwhiteb"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+in_red() {
+  [ -t 1 ] && echo -n "$cred"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+in_green() {
+  [ -t 1 ] && echo -n "$cgreen"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+
+copy_castle_tests_passed=0
+copy_castle_tests_failed=0
+beat_the_tides_tests_passed=0
+beat_the_tides_tests_failed=0
+
+copy_castle_bool=1
+beat_the_tides_bool=1
+
+check_existence() {
+  local file="$1"
+  if [ ! -f "$file" ]; then
+    echo "    $file does not exist." | in_red
+    return 1
+  fi
+}
+
+check_sets_shell() {
+  local file="$1"
+  if [ ! grep "SHELL *= *bash" "$file" &> /dev/null ]; then
+    echo "    $file does not set SHELL to bash." | in_red
+    return 1
+  fi
+}
+
+check_phony_clean() {
+  # TODO Maybe check this by creating a file called `clean`?
+  local file="$1"
+  if [ ! grep ".PHONY:.*clean" "$file" &> /dev/null ]; then
+      echo "    $file does not mark clean as a PHONY target." | in_red
+      return 1
+  fi
+}
+
+failed_with_message() {
+  local message="$1"
+  echo "    Test failed." | in_red
+
+  echo "    $message"
+}
+
+failed_with_diff() {
+  local diff="$1"
+
+  echo "    Test failed. Diff output is below." | in_red
+  echo "    '-' signs are next to your output."
+  echo "    '+' signs are next to the expected output."
+  echo "    Lines with no leading symbol do not differ from expected."
+  echo
+
+  # Indent the diff output by 8 spaces
+  echo "$diff" | tail -n +4 | indent8
+}
+
+function check_solution {
+    echo
+}
+
+function hash_directory {
+    tar -c $1 | sha1sum
+}
+
+function check_target() {
+    local file="$1"
+
+    echo "Testing target $file..." | in_white
+
+    ### check for existence and contents of file
+    check_existence "$file"
+    if [ $? -ne 0 ]; then
+        beat_the_tides_bool=0
+        failed_with_message "Makefile does not exist"
+    fi
+
+    output="$(diff -u "$file" ../beat-the-tides-castles/"$file")"
+    if [ $? -ne 0 ]; then
+        beat_the_tides_bool=0
+        failed_with_diff "$(head -n 10 <<< "$output")"
+    else
+        echo "    correct." | in_green
+    fi
+}
+
+# BELOW
+
+cp ../copy-castle/Makefile copy-castle-test/.
+cp ../beat-the-tides/Makefile beat-the-tides-test/.
+
+## copy-castle tests
+echo "Testing copy-castle..." | in_white
+pushd copy-castle-test &> /dev/null
+
+check_existence Makefile
+if [ $? -ne 0 ]; then
+    copy_castle_bool=0
+    failed_with_message "Makefile does not exist"
+fi
+
+check_sets_shell Makefile
+if [ $? -ne 0 ]; then
+    copy_castle_bool=0
+    failed_with_message "Makefile does not set SHELL to bash"
+fi
+
+check_phony_clean Makefile
+if [ $? -ne 0 ]; then
+    copy_castle_bool=0
+    failed_with_message "clean is not marked as a PHONY target"
+fi
+
+originalhash=$(hash_directory .)
+make duplicate &> /dev/null
+
+### check for existence and contents of duplicate
+check_existence duplicate
+if [ $? -ne 0 ]; then
+    copy_castle_bool=0
+    failed_with_message "`make duplicate` did not create a file named duplicate"
+fi
+
+output="$(diff -u duplicate original)"
+echo "Testing contents of duplicate" | in_white
+if [ $? -ne 0 ]; then
+    copy_castle_bool=0
+
+    failed_with_diff "$(head -n 10 <<< "$output")"
+else
+    echo "    correct." | in_green
+fi
+
+make clean &> /dev/null
+cleanedhash=$(hash_directory .)
+
+if [ "$originalhash" != "$cleanedhash" ]; then
+    failed_with_message $(echo "`make clean` was not successful" | indent8)
+    copy_castle_bool=0
+fi
+
+popd &> /dev/null
+
+## beat-the-tides tests
+echo "Testing beat-the-tides..." | in_white
+pushd beat-the-tides-test &> /dev/null
+
+check_existence Makefile
+if [ $? -ne 0 ]; then
+    beat_the_tides_bool=0
+    failed_with_message "Makefile does not exist"
+fi
+
+check_sets_shell Makefile
+if [ $? -ne 0 ]; then
+    beat_the_tides_bool=0
+    failed_with_message "Makefile does not set SHELL to bash"
+fi
+
+check_phony_clean Makefile
+if [ $? -ne 0 ]; then
+    beat_the_tides_bool=0
+    failed_with_message "clean is not marked as a PHONY target"
+fi
+
+originalhash=$(hash_directory .)
+make fin1 &> /dev/null
+
+check_target int1
+check_target fin1
+
+make clean &> /dev/null
+cleanedhash=$(hash_directory .)
+
+if [ "$originalhash" != "$cleanedhash" ]; then
+    echo $originalhash
+    echo $cleanedhash
+    failed_with_message "make clean was not successful"
+    beat_the_tides_bool=0
+fi
+
+popd &> /dev/null
+
+rm -rf copy-castle-test
+rm -rf beat-the-tides-test
+
+cp -r copy-castle-reset copy-castle-test
+cp -r beat-the-tides-reset beat-the-tides-test
+
+# ABOVE
+
+tests_passed=$((copy_castle_bool + beat_the_tides_bool))
+tests_failed=$((2 - tests_passed))
+
+echo
+echo "Finished."
+echo "Tests passed: $tests_passed"
+echo "Tests failed: $tests_failed"
+echo "Tests total:  $((tests_passed + tests_failed))"
+echo
+echo "{\"scores\": {\"copy_castle\": $copy_castle_bool, \"beat_the_tides\": $beat_the_tides_bool}}"
