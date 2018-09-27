@@ -12,5 +12,5 @@ clean:
 gates-hillman-center:
 	mkdir $@
 
-handin.zip: no-uncomitted-changes message.sh reorganize.sh flight-prep.sh battle.sh
+handin.zip: message.sh reorganize.sh flight-prep.sh battle.sh
 	zip -r $@ message.sh reorganize.sh flight-prep.sh battle.sh
