@@ -1,0 +1,298 @@
+#!/usr/bin/env bash
+
+# cd into folder where the driver is located, or quit (defensive)
+# http://stackoverflow.com/questions/3349105
+cd "${0%/*}" || exit 1
+
+echo "In: $(pwd)"
+echo
+
+indent4() {
+  sed -e 's/^/    /'
+}
+indent8() {
+  sed -e 's/^/        /'
+}
+list_dir() {
+  if which tree &> /dev/null; then
+    pushd "$@" &> /dev/null
+    tree -F --dirsfirst .
+    popd &> /dev/null
+  else
+    pushd "$@" &> /dev/null
+    find . | sort
+    popd &> /dev/null
+  fi
+}
+
+# Helper colors
+cnone="$(echo -ne '\033[0m')"
+cwhiteb="$(echo -ne '\033[1;37m')"
+cred="$(echo -ne '\033[0;31m')"
+cgreen="$(echo -ne '\033[0;32m')"
+
+# Detects whether we can add colors or not
+# http://stackoverflow.com/a/911213
+in_white() {
+  [ -t 1 ] && echo -n "$cwhiteb"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+in_red() {
+  [ -t 1 ] && echo -n "$cred"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+in_green() {
+  [ -t 1 ] && echo -n "$cgreen"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+
+message_score=0
+reorganize_score=0
+flight_prep_score=0
+battle_score=0
+
+check_if_executable() {
+  local file="$1"
+
+  if [ ! -f "$file" ]; then
+    echo "    $file does not exist." | in_red
+    return 1
+  fi
+
+  if [ ! -x "$file" ]; then
+    echo "    $file does not have executable permissions." | in_red
+    return 1
+  fi
+
+  if ! head -n 1 "$file" | grep '#!/.*bash' &> /dev/null; then
+    echo "    $file does not have a shebang." | in_red
+    return 1
+  fi
+}
+
+failed_with_message() {
+  local message="$1"
+  echo "    Test failed." | in_red
+
+  echo "    $message"
+}
+
+failed_with_diff() {
+  local diff="$1"
+
+  echo "    Test failed. Diff output is below." | in_red
+  echo "    '-' signs are next to your output."
+  echo "    '+' signs are next to the expected output."
+  echo
+
+  # Indent the diff output by 8 spaces
+  echo "$diff" | tail -n +4 | indent8
+}
+
+set_up_sandbox() {
+  rm -rf .sandbox
+  mkdir -p .sandbox
+
+  for file in "$@"; do
+    if [ -f "$file" ]; then
+      cp "$file" .sandbox
+    elif [ -d "$file" ]; then
+      cp -r "$file" .sandbox
+    fi
+  done
+}
+
+grade_message() {
+  echo "Testing message.sh..." | in_white
+
+  pushd ".." &> /dev/null
+
+  check_if_executable "./message.sh"
+  good_executable="$?"
+  if [ $good_executable -ne 0 ]; then
+    popd &> /dev/null
+    return
+  fi
+
+  local expected output
+  expected="Help me, Obi-Wan Kenobi. You're my only hope."
+
+  output="$(diff -u <(./message.sh) <(echo "$expected"))"
+
+  if [ $? -ne 0 ]; then
+    failed_with_diff "$output"
+  else
+    echo "    correct." | in_green
+    message_score=1
+  fi
+
+  popd &> /dev/null
+}
+
+grade_reogranize() {
+  echo "Testing reorganize.sh..." | in_white
+
+  pushd ".." &> /dev/null
+  check_if_executable "./reorganize.sh"
+  good_executable="$?"
+  popd &> /dev/null
+  [ $good_executable -ne 0 ] && return
+
+  for problem_folder in ./tests/intel*; do
+    local problem
+    problem="$(basename "$problem_folder")"
+
+    set_up_sandbox ../reorganize.sh "$problem_folder"
+    pushd .sandbox &> /dev/null
+
+    # Make the name of the top level folder always the same
+    # (regardless problem of number)
+    mv "$problem" intel
+
+    output="$(./reorganize.sh 2>&1)"
+
+    # We cd first so that the top level folders are the same (for diff output)
+    if ! diff <(cd ./intel && find . | sort) \
+        <(cd "../tests/refsol-$problem" && find . | sort) &> /dev/null; then
+      failed_with_message "Directory contents differ."
+      echo "        intel/ (expected):"
+      list_dir "../tests/refsol-$problem" | indent8
+      echo "        intel/ (actual):"
+      list_dir intel | indent8
+
+      if [ -n "$output" ]; then
+        echo "    This was the output from your script:"
+        echo "$output" | indent4 | in_white
+      fi
+
+      popd &> /dev/null
+      return
+    fi
+
+    popd &> /dev/null
+  done
+
+  echo "    correct." | in_green
+  reorganize_score=1
+}
+
+grade_flight_prep() {
+  echo "Testing flight-prep.sh..." | in_white
+
+  pushd ".." &> /dev/null
+  check_if_executable "./flight-prep.sh"
+  good_executable="$?"
+  popd &> /dev/null
+  [ $good_executable -ne 0 ] && return
+
+  set_up_sandbox ../flight-prep.sh ./tests/flight-prep
+
+  pushd .sandbox &> /dev/null
+
+  # Indent their output
+  ./flight-prep.sh 2>&1 | indent4 | in_white
+
+  # Check that old files (in top level directory) are gone
+  if [ -f "./flight-prep/Luke Skywalker" ]; then
+    failed_with_message "File still exists: './flight-prep/Luke Skywalker'"
+    popd &> /dev/null
+    return
+  fi
+  if [ -f "./flight-prep/R2-D2" ]; then
+    failed_with_message "File still exists: './flight-prep/R2-D2'"
+    popd &> /dev/null
+    return
+  fi
+
+  # Check that new files exist (in the right subfolders)
+  if [ ! -f "./flight-prep/cockpit/Luke Skywalker" ]; then
+    failed_with_message "Missing file: './flight-prep/cockpit/Luke Skywalker'"
+    popd &> /dev/null
+    return
+  fi
+  if [ ! -f "./flight-prep/astromech slot/R2-D2" ]; then
+    failed_with_message "Missing file: './flight-prep/astromech slot/R2-D2'"
+    popd &> /dev/null
+    return
+  fi
+
+  # Check that the contents of the files haven't been changed
+  if ! diff "./flight-prep/cockpit/Luke Skywalker" \
+      "../tests/flight-prep/Luke Skywalker" &> /dev/null; then
+    failed_with_message "File contents differ: './flight-prep/cockpit/Luke Skywalker'"
+    popd &> /dev/null
+    return
+  fi
+  if ! diff "./flight-prep/astromech slot/R2-D2" \
+      "../tests/flight-prep/R2-D2" &> /dev/null; then
+    failed_with_message "File contents differ: './flight-prep/astromech slot/R2-D2'"
+    popd &> /dev/null
+    return
+  fi
+
+  popd &> /dev/null
+
+  echo "    correct." | in_green
+  flight_prep_score=1
+}
+
+grade_battle() {
+  echo "Testing battle.sh..." | in_white
+
+  pushd ".." &> /dev/null
+  check_if_executable "./battle.sh"
+  good_executable="$?"
+  popd &> /dev/null
+  [ $good_executable -ne 0 ] && return
+
+  set_up_sandbox ../battle.sh ./tests/pilots
+
+  pushd .sandbox &> /dev/null
+
+  output="$(./battle.sh 2>&1)"
+
+  # We cd first so that the top level folders are the same (for diff output)
+  if ! diff <(cd ./pilots && find . | sort) \
+      <(cd ../tests/refsol-pilots && find . | sort) &> /dev/null; then
+    failed_with_message "Directory contents differ."
+    echo "        intel/ (expected):"
+    list_dir ../tests/refsol-pilots | indent8
+    echo "        intel/ (actual):"
+    list_dir pilots | indent8
+
+    if [ -n "$output" ]; then
+      echo "    This was the output from your script:"
+      echo "$output" | indent4 | in_white
+    fi
+
+    popd &> /dev/null
+    return
+  fi
+
+  popd &> /dev/null
+
+  echo "    correct." | in_green
+  battle_score=1
+}
+
+grade_message
+echo
+grade_reogranize
+echo
+grade_flight_prep
+echo
+grade_battle
+
+
+tests_passed=$((message_score + reorganize_score + flight_prep_score + battle_score))
+tests_failed=$((4 - tests_passed))
+
+echo
+echo "Tests passed: $tests_passed"
+echo "Tests failed: $tests_failed"
+echo "Tests total:  4"
+echo
+echo "{\"scores\": {\"message\": $message_score, \"reorganize\": $reorganize_score, \"flight prep\": $flight_prep_score, \"battle\": $battle_score}}"
