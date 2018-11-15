@@ -90,11 +90,9 @@ failed_with_diff() {
   echo "$diff" | tail -n +4 | indent8
 }
 
-function check_solution {
-    echo
-}
-
 function hash_directory {
+    # Tar includes access times, so this avoids a race
+    find $1 | xargs touch -t 201801010000
     tar -c $1 | sha1sum
 }
 
@@ -107,7 +105,7 @@ function check_target() {
     check_existence "$file"
     if [ $? -ne 0 ]; then
         beat_the_tides_bool=0
-        failed_with_message "Makefile does not exist"
+        failed_with_message "$file does not exist"
     fi
 
     output="$(diff -u "$file" ../beat-the-tides-castles/"$file")"
@@ -118,8 +116,6 @@ function check_target() {
         echo "    correct." | in_green
     fi
 }
-
-# BELOW
 
 cp ../copy-castle/Makefile copy-castle-test/.
 cp ../beat-the-tides/Makefile beat-the-tides-test/.
@@ -156,8 +152,8 @@ if [ $? -ne 0 ]; then
     failed_with_message "`make duplicate` did not create a file named duplicate"
 fi
 
-output="$(diff -u duplicate original)"
 echo "Testing contents of duplicate" | in_white
+output="$(diff -u duplicate original)"
 if [ $? -ne 0 ]; then
     copy_castle_bool=0
 
@@ -208,8 +204,6 @@ make clean &> /dev/null
 cleanedhash=$(hash_directory .)
 
 if [ "$originalhash" != "$cleanedhash" ]; then
-    echo $originalhash
-    echo $cleanedhash
     failed_with_message "make clean was not successful"
     beat_the_tides_bool=0
 fi
@@ -221,8 +215,6 @@ rm -rf beat-the-tides-test
 
 cp -r copy-castle-reset copy-castle-test
 cp -r beat-the-tides-reset beat-the-tides-test
-
-# ABOVE
 
 tests_passed=$((copy_castle_bool + beat_the_tides_bool))
 tests_failed=$((2 - tests_passed))
