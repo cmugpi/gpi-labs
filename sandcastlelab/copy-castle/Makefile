@@ -1,8 +1,0 @@
-SHELL = /usr/bin/env bash
-.PHONY: clean
-
-duplicate: REPLACE_WITH_DEPENDENCIES
-	REPLACE_WITH_RECIPE
-
-clean:
-	REPLACE_WITH_RECIPE
