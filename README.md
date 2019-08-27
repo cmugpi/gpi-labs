@@ -1,6 +1,6 @@
 # gpi-labs
 
-We'll update this repository weekly to distribute the labs for 15-131.
+We'll update this repository weekly to distribute the labs for 07-131.
 
 ## Getting started
 
