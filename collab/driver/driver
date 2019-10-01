@@ -1,0 +1,168 @@
+#!/usr/bin/env bash
+
+# cd into folder where the driver is located, or quit (defensive)
+# http://stackoverflow.com/questions/3349105
+cd "${0%/*}" || exit 1
+
+echo "In: $(pwd)"
+echo
+
+indent4() {
+  sed -e 's/^/    /'
+}
+indent8() {
+  sed -e 's/^/        /'
+}
+list_dir() {
+  if which tree &> /dev/null; then
+    pushd "$@" &> /dev/null
+    tree -F --dirsfirst .
+    popd &> /dev/null
+  else
+    pushd "$@" &> /dev/null
+    find . | sort
+    popd &> /dev/null
+  fi
+}
+
+# Helper colors
+cnone="$(echo -ne '\033[0m')"
+cwhiteb="$(echo -ne '\033[1;37m')"
+cred="$(echo -ne '\033[0;31m')"
+cgreen="$(echo -ne '\033[0;32m')"
+
+# Detects whether we can add colors or not
+# http://stackoverflow.com/a/911213
+in_white() {
+  [ -t 1 ] && echo -n "$cwhiteb"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+in_red() {
+  [ -t 1 ] && echo -n "$cred"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+in_green() {
+  [ -t 1 ] && echo -n "$cgreen"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+
+no_unstaged_score=0
+no_staged_score=0
+haystack_score=0
+merged_score=0
+
+REPO_NAME="binsearch"
+
+ensure_in_git_repo() {
+  if [ -d .git ] || git rev-parse --git-dir &> /dev/null; then
+    return 0
+  else
+    echo "    It appears we're not in a git repo." | in_red
+    echo "    $PWD"
+    return 1
+  fi
+}
+
+grade_no_unstaged() {
+  echo "Checking for no unstaged changes..." | in_white
+
+  ensure_in_git_repo || return
+
+  if git diff --quiet; then
+    echo "    correct." | in_green
+    no_unstaged_score=1
+  else
+    echo "    You have unstaged changes." | in_red
+    echo
+    echo "    Run 'git status' to see affected files."
+    echo "    Run 'git diff' to see the actual changes."
+    no_unstaged_score=0
+  fi
+}
+
+grade_no_staged() {
+  echo "Checking for no staged changes..." | in_white
+
+  ensure_in_git_repo || return
+
+  if git diff --staged --quiet; then
+    echo "    correct." | in_green
+    no_staged_score=1
+  else
+    echo "    You have staged changes." | in_red
+    echo
+    echo "    Run 'git status' to see affected files."
+    echo "    Run 'git diff --staged' to see the actual changes."
+    no_staged_score=0
+  fi
+}
+
+grade_haystack() {
+  echo "Checking that 'l' was renamed to 'haystack'..." | in_white
+
+  ensure_in_git_repo
+
+  if grep -E '\bl\b' search.py &> /dev/null; then
+    echo "    You haven't renamed all occurences of 'l' to 'haystack'" | in_red
+    haystack_score=0
+    return
+  fi
+
+  # NOTE(jez) We're assuming that if there are no staged/unstaged changes
+  #    and the changes exist in the file, that they've been committed.
+  #    This is an approximation.
+
+  echo "    correct." | in_green
+  haystack_score=1
+}
+
+grade_merged() {
+  echo "Checking that jez-change-names was merged..." | in_white
+
+  if ! git branch --merged master | grep jez-change-names &> /dev/null; then
+    echo "    jez-change-names has not been merged." | in_red
+    merged_score=0
+    return
+  fi
+
+  if grep '<<<<<<<\|=======\|>>>>>>>\|HEAD\|jez-change-names' search.py; then
+    echo "    You haven't fully resolved all conflicts." | in_red
+    echo "    Hint: make sure to remove all '<<<<<<<', '=======', and '>>>>>>>'"
+    merged_score=0
+    return
+  fi
+
+  if grep -E '\bvalue\b' search.py &> /dev/null; then
+    echo "    You haven't included all changes from jez-change-names" | in_red
+    merged_score=0
+    return
+  fi
+
+  echo "    correct." | in_green
+  merged_score=1
+}
+
+pushd "../$REPO_NAME" &> /dev/null
+
+grade_no_unstaged
+echo
+grade_no_staged
+echo
+grade_haystack
+echo
+grade_merged
+
+popd &> /dev/null
+
+tests_passed=$((no_unstaged_score + no_staged_score + haystack_score + merged_score))
+tests_failed=$((4 - tests_passed))
+
+echo
+echo "Tests passed: $tests_passed"
+echo "Tests failed: $tests_failed"
+echo "Tests total:  4"
+echo
+echo "{\"scores\": {\"no unstaged\": $no_unstaged_score, \"no staged\": $no_staged_score, \"haystack\": $haystack_score, \"merged\": $merged_score}}"
