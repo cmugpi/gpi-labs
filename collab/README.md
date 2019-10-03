@@ -10,6 +10,9 @@ These two problems are foundational to the reason why Git was invented in the
 first place, and as such it has very powerful mechanisms to address them. The
 first time you see them, though, they're kind of confusing.
 
+This week's lab also has a GitHub portion. Please check the course website for
+more details.
+
 ## logistics
 
 You should work on this lab on Andrew.
