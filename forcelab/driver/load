@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# cd into folder where the driver is located, or quit (defensive)
+# http://stackoverflow.com/questions/3349105
+cd "${0%/*}" || exit 1
+
+problem="$1"
+
+case "$problem" in
+  reorganize)
+    rm -rf intel
+    cp -r ./tests/intel01 ../intel
+    ;;
+  flight-prep)
+    rm -rf flight-prep
+    cp -r ./tests/flight-prep ..
+    ;;
+  battle)
+    rm -rf pilots
+    cp -r ./tests/pilots ..
+    ;;
+  all)
+    rm -rf intel flight-prep pilots
+    cp -r ./tests/intel01 ../intel
+    cp -r ./tests/flight-prep ..
+    cp -r ./tests/pilots ..
+    ;;
+  *)
+    echo "usage: driver/load <problem>"
+    echo "       driver/load all"
+    ;;
+esac
+
