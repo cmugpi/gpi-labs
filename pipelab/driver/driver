@@ -105,7 +105,7 @@ for testdir in ./goomba-spam/tests/*; do
   ./destroy-all-goombas.sh "$url" > "./driver/$testdir/actual.txt" 2> /dev/null
   popd &> /dev/null
 
-  output="$(diff -u "./$testdir/expected.txt" "./$testdir/actual.txt")"
+  output="$(diff -u "./$testdir/actual.txt" "./$testdir/expected.txt")"
 
   # Use the return ($?) of the diff command to tell whether the files differed
   if [ $? -ne 0 ]; then
@@ -128,7 +128,7 @@ pushd .. &> /dev/null
 ./scout-the-enemies.sh > "./driver/bonus/actual.txt" 2> /dev/null
 popd &> /dev/null
 
-output="$(diff -u "./bonus/expected.txt" "./bonus/actual.txt")"
+output="$(diff -u "./bonus/actual.txt" "./bonus/expected.txt")"
 
 # Use the return ($?) of the diff command to tell whether the files differed
 if [ $? -ne 0 ]; then
