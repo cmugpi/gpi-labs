@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# $@ is a list of all the arguments. See http://unix.stackexchange.com/q/135010
+for item in "$@"; do
+  item_type="$(basename "$item")"
+
+  if [ "$item_type" != "COIN" ]; then
+    echo $"You can't collect '$item' because it's not a coin!"
+    exit 1
+  fi
+
+  # mark coin as collected by writing into it
+  echo 'collected' > "$item"
+done

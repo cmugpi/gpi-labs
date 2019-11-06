@@ -1,0 +1,216 @@
+#!/usr/bin/env bash
+
+# cd into folder where the driver is located, or quit (defensive)
+# http://stackoverflow.com/questions/3349105
+cd "${0%/*}" || exit 1
+
+echo "In: $(pwd)"
+
+indent4() {
+  sed -e 's/^/    /'
+}
+indent8() {
+  sed -e 's/^/        /'
+}
+
+# Helper colors
+cnone="$(echo -ne '\033[0m')"
+cwhiteb="$(echo -ne '\033[1;37m')"
+cred="$(echo -ne '\033[0;31m')"
+cgreen="$(echo -ne '\033[0;32m')"
+
+# Detects whether we can add colors or not
+# http://stackoverflow.com/a/911213
+in_white() {
+  [ -t 1 ] && echo -n "$cwhiteb"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+in_red() {
+  [ -t 1 ] && echo -n "$cred"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+in_green() {
+  [ -t 1 ] && echo -n "$cgreen"
+  cat -
+  [ -t 1 ] && echo -n "$cnone"
+}
+
+goomba_tests_passed=0
+goomba_tests_failed=0
+coins_tests_passed=0
+coins_tests_failed=0
+bonus_tests_passed=0
+bonus_tests_failed=0
+
+check_if_executable() {
+  local file="$1"
+
+  if [ ! -f "$file" ]; then
+    echo "    $file does not exist." | in_red
+    return 1
+  fi
+
+  if [ ! -x "$file" ]; then
+    echo "    $file does not have executable permissions." | in_red
+    return 1
+  fi
+
+  if ! head -n 1 "$file" | grep '#!/.*bash' &> /dev/null; then
+    echo "    $file does not have a shebang." | in_red
+    return 1
+  fi
+}
+
+failed_with_message() {
+  local message="$1"
+  echo "    Test failed." | in_red
+
+  echo "    $message"
+}
+
+failed_with_diff() {
+  local diff="$1"
+
+  echo "    Test failed. Diff output is below." | in_red
+  echo "    '-' signs are next to your output."
+  echo "    '+' signs are next to the expected output."
+  echo "    Lines with no leading symbol do not differ from expected."
+  echo
+
+  # Indent the diff output by 8 spaces
+  echo "$diff" | tail -n +4 | indent8
+}
+
+
+for testdir in ./goomba-spam/tests/*; do
+  testname="$(basename "$testdir")"
+  url="$(head -n 1 "$testdir"/url.txt)"
+
+  echo
+  echo "Testing $testname..." | in_white
+
+  if [[ "$url" =~ ^file://* ]]; then
+    # Autolab doesn't allow network activity, so we need file URLs,
+    # But we aren't guaranteed what folder we're running in on Autolab,
+    # so we have to figure it out
+    url=$(sed -e "s,{{pwd}},$(pwd)," <<< "$url")
+  fi
+
+  echo "    Using URL: $url"
+
+  # cd into folder with student's code, then cd back here after
+  pushd .. &> /dev/null
+  ./destroy-all-goombas.sh "$url" > "./driver/$testdir/actual.txt" 2> /dev/null
+  popd &> /dev/null
+
+  output="$(diff -u "./$testdir/expected.txt" "./$testdir/actual.txt")"
+
+  # Use the return ($?) of the diff command to tell whether the files differed
+  if [ $? -ne 0 ]; then
+    # increment tests failed counter
+    ((++goomba_tests_failed))
+
+    failed_with_diff "$(head -n 10 <<< "$output")"
+  else
+    echo "    correct." | in_green
+    # increment tests passed counter
+    ((++goomba_tests_passed))
+  fi
+done
+
+
+echo
+echo "Testing Bonus..." | in_white
+# pushd to the parent directory
+pushd .. &> /dev/null
+./scout-the-enemies.sh > "./driver/bonus/actual.txt" 2> /dev/null
+popd &> /dev/null
+
+output="$(diff -u "./bonus/expected.txt" "./bonus/actual.txt")"
+
+# Use the return ($?) of the diff command to tell whether the files differed
+if [ $? -ne 0 ]; then
+  # increment tests failed counter
+  ((++bonus_tests_failed))
+
+  failed_with_diff "$(head -n 10 <<< "$output")"
+else
+  echo "    correct." | in_green
+  # increment tests passed counter
+  ((++bonus_tests_passed))
+fi
+
+
+
+
+
+# pushd to the parent directory
+pushd .. &> /dev/null
+for testdir in ./driver/coins/tests/*; do
+  echo
+  echo "Testing '$testdir'..." | in_white
+
+  "$testdir"/setup-platforms.sh
+
+  ./collect-all-coins.sh
+
+  foundallcoins=0
+  while read -r coin_file; do
+    if [ ! -f "$coin_file" ]; then
+      failed_with_message "Needed to collect '$coin_file' but coin didn't exist."
+      foundallcoins=1
+      break
+    fi
+
+    contents="$(cat "$coin_file")"
+    if [ "$contents" != 'collected' ]; then
+      failed_with_message "Needed to collect '$coin_file' but coin contained:"
+      indent4 < "$coin_file"
+      foundallcoins=1
+      break
+    fi
+  done < "$testdir/coins.txt"
+
+  if [ $foundallcoins -ne 0 ]; then
+    ((++coins_tests_failed))
+    continue
+  fi
+
+  keptallnoncoins=0
+  while read -r non_coin_file; do
+    if [ ! -f "$non_coin_file" ]; then
+      failed_with_message "Needed to leave '$non_coin_file' untouched but it didn't exist."
+      keptallnoncoins=1
+      break
+    fi
+
+    contents="$(cat "$non_coin_file")"
+    if [ "$contents" != '' ]; then
+      failed_with_message "Needed to leave '$non_coin_file' untouched but it contained:"
+      cat "$non_coin_file"
+      keptallnoncoins=1
+      break
+    fi
+  done < "$testdir/non-coins.txt"
+
+  if [ $keptallnoncoins -eq 0 ]; then
+    echo "    correct." | in_green
+    ((++coins_tests_passed))
+  else
+    ((++coins_tests_failed))
+  fi
+done
+popd &> /dev/null
+
+tests_passed=$((goomba_tests_passed + coins_tests_passed + bonus_tests_passed))
+tests_failed=$((goomba_tests_failed + coins_tests_failed + bonus_tests_failed))
+
+echo
+echo "Finished."
+echo "Tests passed: $tests_passed"
+echo "Tests failed: $tests_failed"
+echo "Tests total:  $((tests_passed + tests_failed))"
+echo
+echo "{\"scores\": {\"goomba spam\": $goomba_tests_passed, \"coins\": $coins_tests_passed, \"bonus\": $bonus_tests_passed}}"
