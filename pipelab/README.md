@@ -85,7 +85,7 @@ conveniently named `COIN` and are littered throughout the level on various
 `platform`s, among other things like `BOX`es, `PIPE`s, and `SHELL`s. All you
 have to do is run `./collect` on each coin!
 
-Collect works by adding writing `collected` into the file. Thus, only `COIN`s
+Collect works by writing `collected` into the file. Thus, only `COIN`s
 will have their contents updated by your oneliner, and their contents will all
 be `collected`. (Note: you should not be deleting any files in this oneliner.)
 
