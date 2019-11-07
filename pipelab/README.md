@@ -113,8 +113,8 @@ mario.
 Thankfully, there's a folder "LevelInfo", which for each level includes the
 level setting, and the different enemies in that level.
 
-You decide to output a sorted list of all of the possible enemies, without
-duplicates.
+You decide to output a sorted (ignoring case) list of all of the possible
+enemies, without duplicates.
 
 ### logistics
 
