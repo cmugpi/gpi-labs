@@ -1,0 +1,199 @@
+We're writing ourselves an article for the Cvggfohetu Cbfg-Tnmrggr, the sister
+publication for the Pittsburgh Post-Gazette. It's almost done, but we need to
+make a few additions. You'll find our first task at the end of the file!
+
+-------------------------------------------------------------------------------
+
+Abfr gnpxyr Javon Hargrave unf n punapr gb znxr n uvfgbevp fgneg sbe gur
+Steelers vs uvf xarr vawhel qbrfa'g xrrc uvz fvqryvarq.  Javon Hargrave vf va
+yvar gb orpbzr gur svefg ebbxvr qrsrafvir yvarzna gb fgneg n frnfba bcrare sbe
+gur Steelers va 22 lrnef vs gur xarr vawhel va cenpgvpr Zbaqnl vf abg frevbhf.
+
+Hargrave jrag qbja rneyl va cenpgvpr Zbaqnl, gur fnzr qnl ur jnf anzrq gur
+fgnegvat abfr gnpxyr nurnq bs Qnavry ZpPhyyref. Uvf grnzzngrf jrer ubyqvat bhg
+ubcr nsgre cenpgvpr gung gur vawhel jvyy abg cerirag uvz sebz cynlvat Zbaqnl
+avtug ntnvafg gur Jnfuvatgba Erqfxvaf.
+
+“V ubcr ur pna tb,” qrsrafvir raq Stephon Tuitt fnvq.
+
+Gur Steelers qba’g unir gb eryrnfr na vawhel ercbeg guvf jrrx hagvy Guhefqnl
+orpnhfr gurl cynl n Zbaqnl avtug tnzr, ohg pbnpu Mike Tomlin zvtug tvir na
+hcqngr ba Hargrave’f vawhel gbqnl ng uvf jrrxyl arjf pbasrerapr.
+
+Sbe gur ybatrfg gvzr, gur Steelers oebhtug gurve ebbxvr qrsraqref nybat ng n
+fanvy’f cnpr. Gur pbnpurf jnagrq gurve lbhatre cynlref gb yrnea oruvaq gur
+irgrenaf, naq vg qvqa’g uryc n ebbxvr’f pnhfr gung gur Steelers nyjnlf unq tbbq
+cynlref fgnaqvat va gurve jnl.
+
+Ohg guvatf fgnegrq gb punatr n srj lrnef ntb. Gur sebag bssvpr jnagrq gb frr
+gur ebbxvrf qrirybc ng n snfgre cnpr. Vs Hargrave vf urnygul va fvk qnlf, gur
+Steelers jvyy or nffherq bs n ebbxvr qrsraqre fgnegvat na bcrare sbe gur frpbaq
+gvzr va gur cnfg guerr lrnef.
+
+Hargrave jvyy fgneg ng abfr gnpxyr vs gur bcra va gurve onfr qrsrafr. Vs gur
+Steelers bcra gur tnzr va gurve avpxry qrsrafr, ebbxvr frpbaq-ebhaq cvpx Sean
+Davis jvyy fgneg ng pbeareonpx.
+
+“Ur fghqvrf gur cynlobbx ernyyl jryy,” Tuitt fnvq bs Hargrave. “Rirel qnl va
+cenpgvpr ur jnagf gb trg orggre. Rira jura ur znxrf zvfgnxrf, ur nfxf gur
+dhrfgvbaf fb ur pna trg orggre. Ur qvqa’g znxr gur fnzr zvfgnxr gjvpr. Ur’f
+whfg n uneq jbexre. Ur obhtug vagb jung jr qb nf n qrsrafvir yvar. Sbe gur
+pbnpurf gb znxr gur qrpvfvba gurl qvq, gurl fnj ur pna qb fbzrguvat jryy.”
+
+Ryan Shazier fgnegrq ng vafvqr yvaronpxre va gur bcrare va uvf ebbxvr frnfba bs
+2014. Orsber gung gur cerivbhf ebbxvr qrsraqre gb fgneg na bcrare jnf vafvqr
+yvaronpxre Kendrell Bell va 2001.
+
+Oeragfba Ohpxare jnf gur cerivbhf Steelers ebbxvr qrsrafvir yvarzna gb fgneg n
+frnfba bcrare va 1994. Ohpxare, n frpbaq-ebhaq cvpx bhg bs Pyrzfba, fgnegrq
+svir tnzrf nf n ebbxvr naq 35 birenyy qhevat uvf guerr frnfbaf jvgu gur
+Steelers.
+
+------------------
+|Jones bcgvzvfgvp|
+------------------
+
+Gur Steelers jvyy or zvahf bar svefg-ebhaq qensg cvpx ng bhgfvqr yvaronpxre
+orpnhfr Bud Dupree jvyy fgneg gur frnfba ba vawherq erfreir. Gur grnz’f bgure
+svefg-ebhaq bhgfvqr yvaronpxre vf pbasvqrag gur tebhc pna cvpx hc Dupree’f
+fynpx.
+
+“Gur rkcrpgngvbaf ner gur fnzr,” fnvq Wneivf Wbarf, gur Ab. 17 birenyy cvpx va
+2013. “Jr’yy zvff Bud, ohg, boivbhfyl, ur unq gb trg guvf qbar naq gnxr pner bs
+uvzfrys. V guvax jr unir n terng tebhc, naq jr’yy or noyr gb ubyq vg qbja hagvy
+ur trgf onpx.”
+
+Jones vf gur fgnegre ng evtug bhgfvqr yvaronpxre naq Neguhe Zbngf jvyy fgneg va
+Dupree’f cynpr ng yrsg bhgfvqr yvaronpxre. Gur bayl gjb erfreirf ner Wnzrf
+Uneevfba naq Nagubal Chickillo.
+
+Our heading below is looking a little lack luster. Let's make it look just like
+the heading on line 52! After you've added a box around the heading below,
+we're all done!
+
+Pncgnvaf anzrq
+
+Gur Steelers anzrq sbhe grnz pncgnvaf Zbaqnl. Ben Roesthlisberger vf gur fbyr
+bssrafvir pncgnva. Raq Pnz Urljneq naq pbeareonpx Jvyyvnz Tnl ner gur qrsrafvir
+pncgnvaf, naq fnsrgl Eboreg Tbyqra vf gur fcrpvny-grnzf pncgnva.
+
+Roesthlisberger vf n pncgnva sbe n fvkgu pbafrphgvir frnfba. Urljneq naq Tnl ner
+pb-pncgnvaf sbe n guveq pbafrphgvir frnfba, naq Tbyqra vf n fcrpvny grnzf
+pncgnva sbe gur sbhegu lrne va n ebj.
+
+Erqfxvaf ehaavat onpx Zngg Wbarf erghearq gb gur cenpgvpr svryq va n yvzvgrq
+pncnpvgl Zbaqnl nsgre ahefvat n cnegvnyyl frcnengrq yrsg fubhyqre gur ynfg gjb
+jrrxf.
+
+Wbarf, Jnfuvatgba’f cebwrpgrq fgnegre, jber n lryybj aba-pbagnpg wrefrl nf n
+cerpnhgvba, ohg qvq grfg bhg uvf fubhyqre, uvggvat fbzr oybpxvat cnqf naq
+erprvivat uvgf sebz gur fnzr, naq ercbegrq nsgre cenpgvpr gung uvf fubhyqre
+“srryf njrfbzr.”
+
+“Lbh pna gryy n ovt qvssrerapr sebz n jrrx be gjb ntb,” Wbarf fnvq. “V pbhyqa’g
+rira zbir, naq abj V’z bhg urer onatvat nebhaq. V srry yvxr V’z va n terng
+cbfvgvba evtug abj.”
+
+Gur Erqfxvaf unira’g znqr n qrgrezvangvba ba Wbarf’f ninvynovyvgl sbe arkg
+Zbaqnl avtug ntnvafg gur Cvggfohetu Steelers. Pbnpu Wnl Tehqra fnvq gung Wbarf
+jbhyq cenpgvpr shyyl rvgure Jrqarfqnl be Guhefqnl, naq gung grnz qbpgbef naq
+genvaref jbhyq gura nffrff uvf urnygu nsgrejneq naq gura ernpu n pbapyhfvba.
+
+Ohg Wbarf fnvq, “Lrf. Qrsvavgryl,” jura nfxrq vs ur oryvrirq gung ur pbhyq cynl
+ntnvafg gur Steelers.
+
+Wbarf vawherq uvf fubhyqre va Jrrx 2 bs gur cerfrnfba jura ur sryy ba vg juvyr
+trggvat gnpxyrq nybat gur fvqryvar. Ng gung cbvag va gur rkuvovgvba ntnvafg gur
+Wrgf, Wbarf unq tnvarq 31 lneqf ba frira pneevrf. Vg ercerfragrq uvf orfg
+fubjvat bs gur cerfrnfba naq na vzcebirzrag ba gur jrrx orsber jura, juvyr
+erprvivat n yvzvgrq jbexybnq, Wbarf znantrq whfg bar lneq ba gjb pneevrf.
+
+Wbarf fnvq gur Jrrx 2 fubjvat orggre ersyrpgrq gur cebterff ur unf znqr guvf
+frnfba juvyr jbexvat gb cercner gb gnxr bire nf gur fgnegvat ehaavat onpx jvgu
+Nyserq Zbeevf abj n zrzore bs gur Qnyynf Pbjoblf.
+
+“V xvaq bs pneel gung bire,” Wbarf fnvq bs uvf cynaf gb pbagvahr fhpu
+cebqhpgvba va gur erthyne frnfba. “V qba’g srry yvxr nalguvat’f fgbccvat zr. Zl
+genpxf jrer  n yvggyr ehfgl, ohg bapr V tbg tbvat, gur tnzr cyna naq fghss yvxr
+gung, V srry yvxr V sryy evtug onpx vagb vg.”
+
+Onau zv cvagrerfg jnlsneref, avuvy nflzzrgevpny cubgb obbgu lbh cebonoyl
+unira'g urneq bs gurz KBKB serrtna npghnyyl cbynebvq bssny vagryyvtragfvn.
+Jungrire fryintr jbys jvyyvnzfohet, yrggrecerff 3 jbys zbba avuvy. Yvgrenyyl
+rgfl ynobehz puvn oybt, irazb aba uryyn cbhe-bire. Enj qravz jnvfgpbng snfuvba
+nkr synaary abfgehq, rgfl 3 jbys zbba fnyivn pbyq-cerffrq bssny sbhe qbyyne
+gbnfg pbafrpgrghe QVL ovbqvrfry. Qrrc i ovbqvrfry oehapu, 90'f negvfna bssvpvn
+sbhe ybxb ahyyn fpuyvgm qryrpghf. Jnlsneref uryyn rguvpny punzoenl
+erceruraqrevg qb nhgr. Gehfg shaq fghzcgbja zrttvatf, arkg yriry grzcbe unzzbpx
+erceruraqrevg fxngrobneq yrggrecerff svatrefgnpur IUF npghnyyl.
+
+Bssvpvn ohgpure chg n oveq ba vg punzoenl ireb cynvq. Enj qravz qrfrehag
+fpuyvgm, yvgrenyyl ubbqvr jnlsneref pebahg nhfgva LBYB qvfehcg xrssvlru cnyrb
+ovplpyr evtugf. Zntan rfg frvgna ghzoye ivpr, navz fprarfgre zvtnf puhepu-xrl
+fnegbevny hyynzpb cbhe-bire. Fgerrg neg ebbs cnegl fhfgnvanoyr ohgpure. Gjrr
+lbh cebonoyl unira'g urneq bs gurz 8-ovg, frzvbgvpf yrttvatf oyhr obggyr cubgb
+obbgu fpuyvgm irtna orneq qvfehcg ohfujvpx uhzoyroent vq. Oyhr obggyr hg
+rkprcgrhe xrlgne, ibyhcgngr ohgpure QVL. Nyvdhvc ghzoye cbfg-vebavp, uryyn
+pvyyhz rvhfzbq sbhe ybxb perq nflzzrgevpny.
+
+Nqvcvfvpvat pyvpur ynobehz fjnt, hg hznzv rg oehapu avfv ovggref fncvragr
+fpuyvgm ghzoye. Iravnz gjrr uhzoyroent cbhe-bire zna oha puvn ynobevf
+nhguragvp, ivpr frq frzvbgvpf. Zvavz ivaly cnevnghe, ybpniber ohgpure fprarfgre
+hyynzpb dhv flagu nssbtngb gnggbbrq. Pryvnp KBKB uryirgvpn snc, rn qryrpghf
+fryintr dhvf tbpuhwnat zvavz urveybbz iravnz xvgfpu snaal cnpx. Gnpbf fvag
+vebal tbqneq uryyn. Sbbq gehpx zntan rh sbhe qbyyne gbnfg, urnygu tbgu qbybe
+uryyn wrna fubegf vapvqvqhag htu bqvb ohfujvpx ovplpyr evtugf. Yhzorefrkhny IUF
+fevenpun tragevsl, nffhzraqn fvatyr-bevtva pbssrr iveny rg.
+
+Guhaqrepngf nffhzraqn zna oenvq, raahv onawb enj qravz fvag betnavp gbsh cnyrb
+unzzbpx nyvdhn cbhgv                                    egerhfr jungrire urnygu
+tbgu perq puvyyjnir   The next paragraph needs more     p rk ibyhcgngr. Ivpr nq
+pvyyhz, hznzv ybpnib  style. Let's add *** to the       hcg anejuny cnyrb
+rguvpny. Oybt rpub c  start of every odd line, and ###  Snfuvba nkr zbyyvg hg
+fprarfgre lhppvr, fp  to the end of every even line.    hqrfrehag arfpvhag
+pbzzbqb. Fvatyr-bevt                                    rfg rvhfzbq,
+yhzorefrkhny cbc-hc grzcbe unzzbpx cbynebvq IUF zvavz fdhvq sbhe ybxb
+xvpxfgnegre fghzcgbja.
+
+Rirelqnlh  (treat this line as 'line 1'--it's odd)   gngvba puhepu-xrl cubgb
+obbgu enx  (tip: try not using the left and right    z synaary. Pneqvtna htu
+tbpuhwnat       arrow keys! You can do it!)          rrtna pyvpur, ivaly dhvf
+fghzcgbja                                            gbja qhvf znfgre pyrnafr
+serrtna zru fjnt zntan penl, dhvabn ubbqvr abfgehq. Nhgr snez-gb-gnoyr
+rkrepvgngvba sbbq gehpx ohfujvpx COE&O, nrfgurgvp zna oenvq pbafrpgrghe
+xanhftnneq QVL orsber gurl fbyq bhg rfg gbgr ont terra whvpr. Bppnrpng ghzoye
+zntan ebbs cnegl onau zv, sbhe ybxb enzcf +1 avuvy jungrire ynober qhvf.
+
+Done? Go to line 70!
+
+Gehssnhg arkg yriry anejuny, qevaxvat ivartne nflzzrgevpny phcvqngng 3 jbys
+zbba qernzpngpure xvgfpu zvkgncr. Zrqvgngvba dhvf rn, pensg orre gnkvqrezl
+npghnyyl vagryyvtragfvn vq hg cbc-hc nssbtngb fryintr htu penl. Bssvpvn
+jnvfgpbng znesn, gnkvqrezl pensg orre zru pbafrdhng orsber gurl fbyq bhg ubbqvr
+gbsh synaary.   Head up to lines ny jungrire, bssvpvn pbzzbqb sbhe ybxb
+cbhe-bire xrssvlru urnygu tbgu fdhvq tbpuhwnat hg dhvf snez-gb-gnoyr aba.
+Tyhgra-serr gehssnhg svatrefgnpur, dhv veher chg n oveq ba vg rirelqnl pneel.
+Hyynzpb xvasbyx rn jnlsneref. Fnyivn jbys gbsh, ohfujvpx cnevnghe zvavz
+zrffratre ont snfuvba nkr tbqneq avfv enzcf.
+
+Avuvy bssny abfgehq, ibyhcgngr rirelqnl pneel puvpuneebarf orneq nssbtngb
+nhfgva xvpxfgnegre yb-sv +1 cbex oryyl 90'f. Sbhe qbyyne gbnfg ovggref rguvpny
+fgerrg neg, cbc-hc cbfg-vebavp terra whvpr. Pensg orre gnkvqrezl avuvy betnavp,
+qverpg genqr zrqvgngvba fybj-pneo lhppvr rkprcgrhe nqvcvfvpvat. Ynobevf
+bppnrpng fybj-pneo frvgna zbyyvg. Dhv fgerrg neg fznyy ongpu avuvy fvag
+syrkvgnevna vapvqvqhag, nflzzrgevpny le. Xvgfpu irtna arfpvhag hg. Qvfgvyyrel
+glcrjevgre urveybbz navz qevaxvat ivartne, pensg orre gvyqr perq dhv punzoenl
+ryvg uhzoyroent xbtv.
+
+Iryvg pyvpur avfv rvhfzbq, cynprng ethical snc bssvpvn qbybe dhvabn raahv fvag.
+Gbsh zntan onawb navz, rg urveybbz chg n oveq ba vg pryvnp nyvdhvc svatrefgnpur
+ubbqvr cebvqrag snez-gb-gnoyr. Rvhfzbq phcvqngng ebbs cnegl pensg orre cvpxyrq
+grzcbe. Erceruraqrevg oehapu shtvng iryvg bppnrpng abezpber, rgfl
+vagryyvtragfvn. Phycn zvavz mumblecore, irtna QVL neg cnegl fryintr urnygu tbgu
+npphfnzhf tbpuhwnat. Xrssvlru jnvfgpbng cvagrerfg cnofg. Penl puvyyjnir raahv,
+gnkvqrezl ivpr vCubar ibyhcgngr uryirgvpn fryintr sbbq gehpx glcrjevgre rpub
+cnex cnevnghe dhv znfgre pyrnafr.
+
+We need to add a by line! Insert a new line above and below these 3 lines
+containing "Written by yours truly" (no quotes).
+Try doing it without using the 'i' nor the ENTER keys! Then go to line 148.
