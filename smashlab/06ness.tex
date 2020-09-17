@@ -1,0 +1,38 @@
+% Learning Objective: Writing advanced macros
+
+% This is a bonus task. We do not recommend attempt it for your own sanity. Instead, play Smash with us.
+% Sayan: SW-6304-2464-8712
+% Deepayan: SW-2741-6656-0411
+
+As you might know, Ness is an annoying boy. When he wants to do something, he just doesn't stop.
+
+Today, Ness wants to make a new \LaTeX~macro \verb|\pklist| that makes it easy for him to make a list of moves he'll perform on the battlefield like: Thunder \textrightarrow~Fire \textrightarrow~Fire \textrightarrow~Flash.
+
+However, just like his repertoire of attacks, Ness wants the \verb|\pklist| command to be as flexible as possible. Specifically, he wants that the command should be able to take in an arbitrary number of arguments and insert arrows between them.
+
+\verb|\pklist{1}| : 1
+
+\verb|\pklist{1}{2}| : 1 \textrightarrow~2
+
+\verb|\pklist{1}{2}{3}| : 1 \textrightarrow~2 \textrightarrow~ 3
+
+\verb|\pklist{1}{2}{3}{4}| : 1 \textrightarrow~2 \textrightarrow~3 \textrightarrow~4
+
+Hopefully you get the point! Unfortunately, \LaTeX~doesn't support these kinds of demands natively so Ness has come up with a hacky workaround. But something is wrong!
+
+\newcommand{\pklist}[1]{
+    #1 \@ifnextchar\bgroup{\recursepklist}{\par}
+}
+\newcommand{\recursepklist}[1]{\textrightarrow~#1 \@ifnextchar\bgroup{\recursepklist}{\par}}
+
+Can you debug Ness's command so that the hardcoded render and the function call render look the same?
+
+\underline{Hardcoded}
+
+Fire \textrightarrow~Thunder \textrightarrow~Flash \textrightarrow~Magnet \textrightarrow~Final Smash.
+
+\underline{Function Call}
+
+\pklist{Fire}{Thunder}{Flash}{Magnet}{Final Smash}
+
+% HINT: The \@ifnextchar conditional is not working as expected right now.
