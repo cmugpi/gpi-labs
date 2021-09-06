@@ -5,11 +5,14 @@ We'll update this repository weekly to distribute the labs for 07-131.
 ## Getting started
 
 Clone this repository to your private directory on AFS by `cd`ing into your private
-directory and running `git clone https://github.com/cmugpi/gpi-labs.git`.
+directory and running `git clone https://github.com/cmugpi/gpi-labs.git`. This
+will create a directory called `gpi-labs/` containing the current distribution
+of labs for this class.
 
 ## Updating
 
-Every week, you can run `git pull` to get the newest lab.
+Every week, you can run `git pull` from within the `gpi-labs/` directory to get
+the newest lab.
 
 ## Tips
 
