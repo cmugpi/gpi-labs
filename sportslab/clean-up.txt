@@ -1,0 +1,21 @@
+The Pittsburgh Bucaneers are about to sweep the New York Red Sox! But in order
+to do it, they first need to sweep PNC Park clean! Can you help them?
+---
+Delete the following lines to clean the junk out of the seats below. But don't
+harm the Bucaneers' players!
+-soda cans (delete me)
+--Wines Hard (don't delete me!)
+-hot dog
+-pile of trash
+--Sridney Cosby (don't delete me either!)
+-discarded pamphlets
+-generic sports-related memorabilia
+-the Horrible Handtowel
+
+Clean up the dirt and dust from within the lines below, while leaving the
+rest of the field as-is.
+home plate dirt first base
+first base more dirt second base
+second base dustdustdustdustdustthird base
+third base home plate dust dust dust
+home plate dirt dirt dirt pitcher's mound
