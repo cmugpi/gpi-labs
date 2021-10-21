@@ -10,7 +10,7 @@ These two problems are foundational to the reason why Git was invented in the
 first place, and as such it has very powerful mechanisms to address them. The
 first time you see them, though, they're kind of confusing.
 
-This week's lab **also has a GitHub portion**. Please check out the instructions [**here**](https://www.cs.cmu.edu/~07131/f20/topics/readings/week-6/). **Each portion of today's lab will be weighted equally** (i.e. The autograded score and GitHub portion are each worth half of your overall collab grade).
+This week's lab **also has a GitHub portion**. Please check out the instructions [**here**](https://www.cs.cmu.edu/~07131/f21/topics/readings/week-8/). **Each portion of today's lab will be weighted equally** (i.e. The autograded score and GitHub portion are each worth half of your overall collab grade).
 
 ## logistics
 
