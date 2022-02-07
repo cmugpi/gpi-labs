@@ -13,7 +13,7 @@ from within the gpi-labs directory.
 
 To check your work, you can run this command:
 
-    $ driver/driver
+    $ ./driver/driver
 
 The driver by default only tells you whether you're right or wrong. To get more
 information about what specifically is wrong, upload to Autolab.
