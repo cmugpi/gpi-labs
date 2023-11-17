@@ -1,0 +1,13 @@
+platforms/COIN
+platforms/platform01/COIN
+platforms/platform01/platform01/COIN
+platforms/platform01/platform02/COIN
+platforms/platform01/platform03/COIN
+platforms/platform02/COIN
+platforms/platform02/platform01/COIN
+platforms/platform02/platform02/COIN
+platforms/platform02/platform03/COIN
+platforms/platform03/COIN
+platforms/platform03/platform01/COIN
+platforms/platform03/platform02/COIN
+platforms/platform03/platform03/COIN
