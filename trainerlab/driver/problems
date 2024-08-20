@@ -126,9 +126,8 @@ catch the file by moving it in.
 
 create_party() {
   local text="
-Nice job catching your first file! We don't normally keep our files lying
-around like this, so go ahead and add the pokeball you used to catch that file
-to your 'party'.
+Nice job catching your first file! We don’t normally keep our files lying around like this, so 
+go ahead and add your pokeball to your ‘party’ (hint: we helped out with creating it).
 "
 
   if [ -z "$(find . -name 'party')" ]; then
@@ -145,8 +144,9 @@ to your 'party'.
 
 save_progress() {
   local text="
-Now seems like a good time for a checkpoint. To keep track of our current
-progress, we can copy our name file into the 'progress' folder.
+Now seems like a good time for a checkpoint. To keep track of our current progress, 
+you can add a copy of your name file into the 'progress' folder that we created for you. 
+Make sure you have a name file in the Gates Hillman Center too.
 "
 
   if [ -z "$(find . -name 'progress')" ]; then
@@ -163,9 +163,8 @@ progress, we can copy our name file into the 'progress' folder.
 
 tall_grass() {
   local text="
-Often, files don't just pop up like that first one. Sometimes they like to hide
-in the tall grass. See if you can catch another one! Use 'pokeball_2' this time,
-and be sure to add it to your party when you've caught it!
+Often, files don't just pop up like that first one. Sometimes they like to hide in the tall grass. 
+See if you can catch another one! Create 'pokeball_2', and be sure to add it to your party when you've caught the file!
 "
 
   if [ -z "$(find . -name 'tall-grass')" ]; then
@@ -203,13 +202,12 @@ and be sure to add it to your party when you've caught it!
 
 cut_tree() {
   local text="
-You're getting good at this!
+You're getting good at this! 
 
-Walking down the trail in gates-hillman-center, you've come upon a tree that
-blocks your path. Cut it down to continue!
+Walking down the trail in gates-hillman-center, you've come upon a tree that blocks your path. 
 
-Let me know when you're done by making a file called 'clearing' where the tree
-used to be.
+Cut it down to continue and don’t leave any branches behind. Let me know when you're done by 
+making a file called “clearing” where the tree used to be.
 "
 
   if [ ! -e "$GHC_DIR/clearing" ]; then
