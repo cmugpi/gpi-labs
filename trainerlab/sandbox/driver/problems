@@ -1,0 +1,314 @@
+#!/usr/bin/env bash
+
+GHC_DIR="$LAB_DIR/gates-hillman-center"
+
+# Global name variable, filled in elsewhere
+NAME=
+
+your_name() {
+  local text="
+Hello there!
+
+Welcome to the world of UNIX! My name is Cortina! People call me the GPI PROF!
+
+This world is inhabited by creatures called FILES! For some people, FILES are
+entertainment. Others run programs to manipulate them. Myself...I study FILES as
+a profession.
+
+First, what's your name? Tell me by creating a file named what you want to be called!
+After creating the file, call me again to proceed!
+"
+
+local save_progress_text="
+Oh? We detected a file in 'progress', but we can't find your name in
+'gates-hillman-center' anymore. Did you accidentally use 'mv' instead of 'cp'
+to make a backup?
+"
+
+  # So we can detect which files are ours and which file is their name
+  NON_NAME_FILES="Makefile|README.md|professor|tags|pikachu|pidgey|clearing|handin.zip"
+
+  local name_labdir name_ghcdir
+
+  # Check for NAME in LAB_DIR
+  for file in ./*; do
+    [ ! -f "$file" ] && continue
+    if [[ ! "$file" =~ $NON_NAME_FILES ]]; then
+      name_labdir="$(basename "$file")"
+      break
+    fi
+  done
+
+  # Check for NAME in GHC_DIR
+  for file in "$GHC_DIR"/*; do
+    [ ! -f "$file" ] && continue
+    if [[ ! "$file" =~ $NON_NAME_FILES ]]; then
+      name_ghcdir="$(basename "$file")"
+      break
+    fi
+  done
+
+  if [ -z "$name_labdir" ] && [ -z "$name_ghcdir" ]; then
+    # Jump ahead and see if they used 'mv' instead of 'cp' for 'save_progress'
+    if [ "$(find "$GHC_DIR/progress" 2>&1 | wc -l)" -gt 1 ]; then
+      echo "$save_progress_text"
+    else
+      echo "$text"
+    fi
+    return 1
+  elif [ "$name_labdir" = "$name_ghcdir" ]; then
+    echo 'Looks like you copied your character instead of moving it!'
+    return 1
+  elif [ -n "$name_labdir" ]; then
+    NAME="$name_labdir"
+    return 0
+  else
+    NAME="$name_ghcdir"
+    return 0
+  fi
+}
+
+enter_ghc() {
+  local text="
+Right! So your name is $NAME!
+
+$NAME! Your very own UNIX legend is about to unfold! A world of dreams and
+adventures with FILES awaits! Let's go! Move your character file into
+'gates-hillman-center', then cd there to begin!
+
+Tip: You can hit tab to autocomplete paths and filenames.
+Note: Once you're in 'gates-hillman-center', I'll be in the parent folder with
+respect to where you are! Keep this in mind!
+"
+
+  mkdir -p "$GHC_DIR"
+
+  if [ -f "$GHC_DIR/$NAME" ]; then
+    return 0
+  else
+    echo "$text"
+    return 1
+  fi
+}
+
+catch_pikachu() {
+  local text="
+Oh look, a wild pikachu file appeared in 'gates-hillman-center'! We can catch files
+by putting them into FOLDERS.  Quick! Make a folder called 'pokeball_1' and
+catch the file by moving it in.
+
+Tip: Press the up and down arrow keys to scroll through previous commands. To
+discard the current command, press Ctrl+U.
+"
+
+  if [ -z "$(find . -name 'pikachu')" ]; then
+    cat "$LAB_DIR/driver/025.txt" > "$GHC_DIR/pikachu"
+  fi
+
+  if [ -f "$GHC_DIR/pokeball_1/pikachu" ] ||
+     [ -f "$GHC_DIR/party/pokeball_1/pikachu" ]; then
+    if [ "$(find . -name 'pikachu' | wc -l)" -gt 1 ]; then
+      echo "Wait, did you clone pikachu?"
+      return 1
+    elif ! diff "$LAB_DIR/driver/025.txt" "$(find . -name 'pikachu')" &> /dev/null; then
+      echo "Uh, oh, looks like contents of the pikachu file have changed."
+      return 1
+    else
+      return 0
+    fi
+  elif [ -f "$GHC_DIR/pokeball_1/$NAME" ]; then
+    echo "Move the pikachu file into pokeball_1, not your character file!"
+    return 1
+  elif [ -d "$GHC_DIR/../pokeball_1" ]; then
+    echo "Remember, all your work from now on should be in the 'gates-hillman-center' folder."
+    return 1
+  else
+    echo "$text"
+    return 1
+  fi
+}
+
+create_party() {
+  local text="
+Nice job catching your first file! We don't normally keep our files lying
+around like this, so go ahead and add the pokeball you used to catch that file
+to your 'party'.
+
+Tip: Ctrl+A moves your cursor to the beginning of the line, while Ctrl+E moves
+it to the end.
+"
+
+  if [ -z "$(find . -name 'party')" ]; then
+    mkdir -p "$GHC_DIR/party"
+  fi
+
+  if [ -f "$GHC_DIR/party/pokeball_1/pikachu" ]; then
+    return 0
+  else
+    echo "$text"
+    return 1
+  fi
+}
+
+save_progress() {
+  local text="
+Now seems like a good time for a checkpoint. To keep track of our current
+progress, we can copy our name file into the 'progress' folder.
+"
+
+  if [ -z "$(find . -name 'progress')" ]; then
+    mkdir -p "$GHC_DIR/progress"
+  fi
+
+  if [ -f "$GHC_DIR/progress/$NAME" ]; then
+    return 0
+  else
+    echo "$text"
+    return 1
+  fi
+}
+
+tall_grass() {
+  local text="
+Often, files don't just pop up like that first one. Sometimes they like to hide
+in the tall grass. See if you can catch another one! Use 'pokeball_2' this time,
+and be sure to add it to your party when you've caught it!
+"
+
+  if [ -z "$(find . -name 'tall-grass')" ]; then
+    mkdir -p "$GHC_DIR/tall-grass"
+  fi
+
+  if [ -z "$(find . -name '*pidgey')" ]; then
+    cat "$LAB_DIR/driver/016.txt" > "$GHC_DIR/tall-grass/.pidgey"
+  fi
+
+  if [ -f "$GHC_DIR/party/pokeball_2/pidgey" ]; then
+    if [ "$(find . -name '*pidgey' | wc -l)" -gt 1 ]; then
+      echo "Wait, did you clone pidgey?"
+      return 1
+    elif ! diff "$LAB_DIR/driver/016.txt" "$GHC_DIR/party/pokeball_2/pidgey" &> /dev/null; then
+      echo "Uh, oh, looks like contents of the pidgey file have changed."
+      return 1
+    else
+      return 0
+    fi
+  elif [ -f "$GHC_DIR/party/pokeball_2/.pidgey" ]; then
+    echo $'We\'ve "found" all the files that we\'ve caught.'
+    echo $'It doesn\'t make sense for them to still be "hidden"!'
+    return 1
+  elif [ -d "$GHC_DIR/party/pokeball_2/tall-grass" ]; then
+    echo $'The tall grass is not a creature! Return the tall grass to the'
+    echo $'gates-hillman-center and try again. Remember, there is a file hidden'
+    echo $'*within* the tall grass.'
+    return 1
+  else
+    echo "$text"
+    return 1
+  fi
+}
+
+cut_tree() {
+  local text="
+You're getting good at this!
+
+Walking down the trail in gates-hillman-center, you've come upon a tree that
+blocks your path. Cut it down to continue!
+
+Let me know when you're done by making a file called 'clearing' where the tree
+used to be.
+"
+
+  if [ ! -e "$GHC_DIR/clearing" ]; then
+    mkdir -p "$GHC_DIR"/tree/{tree-branch-01,tree-branch-02}/{tree-branch-01,tree-branch-02}
+    touch "$GHC_DIR"/tree/{tree-branch-01,tree-branch-02}/{tree-branch-01,tree-branch-02}/leaf
+  fi
+
+  if [ ! -d "$GHC_DIR/tree" ] &&
+     [ "$(find "$GHC_DIR/clearing" | wc -l)" -eq 1 ] &&
+     [ -e "$GHC_DIR/clearing" ]; then
+    return 0
+  elif [ -d "$GHC_DIR/clearing" ] &&
+       [ "$(find "$GHC_DIR/clearing" | wc -l)" -gt 1 ]; then
+    echo $"If you move a tree into a clearing, the clearing is not a clearing anymore!"
+    return 1
+  elif [ -d "$GHC_DIR/tree" ] && [ -e "$GHC_DIR/clearing" ]; then
+    echo "The clearing is there, but there is still a tree blocking you from getting to it."
+    return 1
+  else
+    echo "$text"
+    return 1
+  fi
+}
+
+just_the_beginning() {
+  local text="
+This is just the beginning of your amazing adventure! Your journey is destined
+to be packed with non-stop action, millions of laughs, heart-pounding perils,
+and endless excitement! Together, you'll encounter fantastic friends, evil bugs,
+and discover files beyond your wildest imagination! And as your story unfolds,
+we'll unlock the magic and mystery of a most wondrous place--the incredible
+world of Unix.
+
+https://www.youtube.com/watch?v=JuYeHPFR3f0
+"
+
+  echo "$text"
+}
+
+in_order() {
+  your_name || exit
+  enter_ghc || exit
+  catch_pikachu || exit
+  create_party || exit
+  save_progress || exit
+  tall_grass || exit
+  cut_tree || exit
+  just_the_beginning
+
+  echo "You're done! Follow the README for how to submit."
+}
+
+get_grade() {
+  local did_your_name=0
+  local did_enter_ghc=0
+  local did_catch_pikachu=0
+  local did_create_party=0
+  local did_save_progress=0
+  local did_tall_grass=0
+  local did_cut_tree=0
+
+  # Wrap in a loop so that we can break upon first failure.
+  # We always break at the end (because it should never loop).
+  while true; do
+    your_name || break
+    did_your_name=1
+    enter_ghc || break
+    did_enter_ghc=1
+    catch_pikachu || break
+    did_catch_pikachu=1
+    create_party || break
+    did_create_party=1
+    save_progress || break
+    did_save_progress=1
+    tall_grass || break
+    did_tall_grass=1
+    cut_tree || break
+    did_cut_tree=1
+
+    just_the_beginning
+    break
+  done
+
+  local scores=""
+  scores="${scores}\"Your Name\": $did_your_name,"
+  scores="${scores}\"Enter GHC\": $did_enter_ghc,"
+  scores="${scores}\"Catch Pikachu\": $did_catch_pikachu,"
+  scores="${scores}\"Create Party\": $did_create_party,"
+  scores="${scores}\"Save Progress\": $did_save_progress,"
+  scores="${scores}\"Tall Grass\": $did_tall_grass,"
+  scores="${scores}\"Cut Tree\": $did_cut_tree"
+
+  echo
+  echo "{scores: {$scores}}"
+}
