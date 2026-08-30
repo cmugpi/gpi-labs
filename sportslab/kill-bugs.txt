@@ -1,6 +1,0 @@
-Over 900 students a year take 15-112.  It seems like everyone wants to take it!
-Help Relly Kivers, of the Pittsburgh Penguins with her 15-112 homework. Here's
-a hint: her bug is just a single character. (Don't change anything else)
-
-def add(x,y):
-	return x-y
