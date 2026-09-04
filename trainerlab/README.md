@@ -47,4 +47,4 @@ Now run the following command from your local computer to 'securely copy'
 	scp ANDREWID@unix.andrew.cmu.edu:~/path/to/handin.zip /mnt/c/Users/USERNAME/Downloads/
 
 Once `handin.zip` is on your local computer, you'll be able to upload the zip
-to Autolab using your browser.
+to Gradescope using your browser.
