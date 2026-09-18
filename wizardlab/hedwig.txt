@@ -1,0 +1,21 @@
+Harry wants to get Hedwig to send a few letters for him--actually, all the same
+one. He's already written it below. Now all we need to do is cast a spell (i.e.,
+a Vim command) to duplicate this message. We need it to show up three times in
+total. Be sure to add a single empty line between each copy.
+
+    Sirius,
+
+    My studies are going well. Midterms are approaching, but I've been having
+    trouble thinking about them. The Ministry of Magic is extending it's grasp
+    all throughout Hogwarts. I feel like I'm running out of time to act.
+
+    Yours,
+    Harry
+
+Now that we've got all the letters written, we need to put them in envelopes.
+Unfortunately, everythings all backwards! Use cut and paste so these sentences
+make sense. Try to not type out 'envelope' nor 'letter' manually!
+
+The first envelope goes inside the first letter.
+The second envelope goes inside the second letter.
+The third envelope goes inside the third letter.
